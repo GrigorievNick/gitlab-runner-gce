@@ -70,3 +70,6 @@ I still haven't found out why the Cache is not working properly, it might be the
 Gitlab Runner currently handles Google Cloud Storage endpoint with the S3 compatibility mode.
 I'll try to find time to fork the runner repository and rewrite the minion cache client to use the latest information
 of how the GCS wants to handle the interoperability communication.
+
+Also [tls can't be skipped according](http://moonlightbox.logdown.com/posts/2016/09/12/gitlab-ci-runner-register-x509-error)
+So please follow this article.
