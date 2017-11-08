@@ -8,7 +8,7 @@ check_interval = 0
   executor = "docker+machine"
   limit = 10
   [runners.docker]
-    image = "node:6"
+    image = "alpine"
     disable_cache = false
     cache_dir = "/cache"
     volumes = ["/cache"]
@@ -28,8 +28,3 @@ check_interval = 0
       "google-use-internal-ip=true",
       "google-use-internal-ip-only=true"
     ]
-  [runners.cache]
-    Type = "s3"
-    ServerAddress = "YOUR-GCS-CACHE_BUCKET_NAME.storage.googleapis.com"
-    AccessKey = "YOUR-GCS-ACCESS_KEY"
-    SecretKey = "YOUR-GCS-SECRET_KEY"

@@ -11,10 +11,7 @@ DOCKER_MACHINE_DL_URL="https://github.com/docker/machine/releases/download/v0.7.
 
 export DEBIAN_FRONTEND=noninteractive
 
-DEBUG="0"
-if [ "$1" = "-d" ]; then
-  DEBUG="1"
-fi
+DEBUG="1"
 
 function downloadConfigurationFilesFromStorage() {
   if [ "$DEBUG" = "1" ]; then
@@ -58,6 +55,7 @@ function registerRunner() {
 
   local ZONE=${RAW_ZONE##*/}
   sed -i 's/PROJECT_ID/'$PROJECT_ID'/' /etc/gitlab-runner/config.toml
+  sed -i 's/GITLAB_CI_URI/'$GITLAB_CI_URI'/' /etc/gitlab-runner/config.toml
   sed -i 's/ZONE/'$ZONE'/' /etc/gitlab-runner/config.toml
   sed -i 's/RUNNER_NAME/'$RUNNER_NAME'/' /etc/gitlab-runner/config.toml
   sed -i 's/RUNNER_TOKEN/'$TOKEN'/' /etc/gitlab-runner/config.toml
