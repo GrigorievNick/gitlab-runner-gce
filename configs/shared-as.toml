@@ -2,6 +2,7 @@ concurrent = 5
 check_interval = 0
 
 [[runners]]
+  tls-ca-file="/etc/gitlab-runner/certs/server.crt"
   url = "GITLAB_CI_URI"
   name = "RUNNER_NAME"
   token = "RUNNER_TOKEN"

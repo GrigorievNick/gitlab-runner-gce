@@ -7,5 +7,5 @@ gcloud --project $2 compute instances create "$RESOURCE_NAME" \
 --scopes "https://www.googleapis.com/auth/cloud-platform" \
 --tags "gitlab-runner" \
 --boot-disk-size "10" --boot-disk-type "pd-standard" --boot-disk-device-name "$RESOURCE_NAME" \
---metadata register_token=$3,config_bucket=gitlab_config,runner_name=${RESOURCE_NAME},gitlab_uri=$4,runner_tags=backend \
---metadata-from-file "startup-script=startup-scripts/prepare-runner.sh"
+--metadata register_token=$3,runner_name=${RESOURCE_NAME},gitlab_uri=$4,runner_tags=backend \
+--metadata-from-file "startup-script=startup-scripts/prepare-runner.sh,runner_config=configs/shared-as.toml,crt_file=server.crt"

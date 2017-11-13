@@ -3,8 +3,8 @@
 Few days ago I wanted to give the [Gitlab CI](https://about.gitlab.com/gitlab-ci/) a spin and came up with this solution to use
 GCE as a scaling cluster for running the tests for different backend projects.
 As the workers in this setup uses Docker, I can define in my projects CI configuration what kind of image I want to run my test on,
-wether it is Node.JS, Python, etc. This is really great, as then I do not have to configure servers for each of the different
-environments separetly and scale those.
+whether it is Node.JS, Python, etc. This is really great, as then I do not have to configure servers for each of the different
+environments separately and scale those.
 
 This repo contains a simple example setup of setting up an auto-scaling [Gitlab Runner](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner) inside GCE.
 We will setup a Runner using "docker+machine" -executor that runs in very minimalistic idle costs (~ $20USD/month).
@@ -30,21 +30,6 @@ export PROJECT_ID=YOUR-PROJECT_ID
 gcloud config set project $PROJECT_ID
 gcloud config set compute/region europe-west1
 gcloud config set compute/zone europe-west1-c
-```
-
-Now create yourself a Google Cloud Storage (GCS) Buckets for holding your Config templates and the Cache.
-You can do this from your Google Cloud Console or by running following commands:
-
-```sh
-export CONFIG_BUCKET=YOUR-GCS-CONFIG_BUCKET_NAME
-
-gsutil mb -l europe-west1 gs://$CONFIG_BUCKET
-```
-
-Then lets copy config template file to our GCS:
-
-```sh
-gsutil cp -r configs/* gs://YOUR-GCS-CONFIG_BUCKET_NAME/
 ```
 
 Now we are ready to start deploying our setup.
