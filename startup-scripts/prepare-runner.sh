@@ -6,7 +6,7 @@ CONFIG_BUCKET=$(curl -s http://metadata/computeMetadata/v1/instance/attributes/c
 GITLAB_CI_URI=$(curl -s http://metadata/computeMetadata/v1/instance/attributes/gitlab_uri -H "Metadata-Flavor: Google")
 RUNNER_NAME=$(curl -s http://metadata/computeMetadata/v1/instance/attributes/runner_name -H "Metadata-Flavor: Google")
 RUNNER_TAGS=$(curl -s http://metadata/computeMetadata/v1/instance/attributes/runner_tags -H "Metadata-Flavor: Google")
-DOCKER_MACHINE_DL_URL="https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-$(uname -s)-$(uname -m)"
+DOCKER_MACHINE_DL_URL="https://github.com/docker/machine/releases/download/v0.12.0/docker-machine-$(uname -s)-$(uname -m)"
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -77,6 +77,8 @@ mUqFqt3712DflIWwlIqcNy8+slA=
 EOF
 
   if [ "$DEBUG" = "1" ]; then
+    echo "GOOGLE_APPLICATION_CREDENTIALS"
+    echo $GOOGLE_APPLICATION_CREDENTIALS
     echo "exec: gitlab-ci-multi-runner register --config /etc/gitlab-runner/config.toml --non-interactive \
   --url $GITLAB_CI_URI --registration-token $REGISTER_TOKEN --tag-list $RUNNER_TAGS \
   --name $RUNNER_NAME --executor docker+machine --tls-ca-file /etc/gitlab-runner/certs/server.crt \
@@ -93,8 +95,8 @@ EOF
   local ZONE=${RAW_ZONE##*/}
   sed -i 's/PROJECT_ID/'${PROJECT_ID}'/' /etc/gitlab-runner/config.toml
   sed -i 's/ZONE/'${ZONE}'/' /etc/gitlab-runner/config.toml
+  sed -i 's#GITLAB_CI_URI#'${GITLAB_CI_URI}'#' /etc/gitlab-runner/config.toml
   sed -i 's/RUNNER_NAME/'${RUNNER_NAME}'/' /etc/gitlab-runner/config.toml
-  sed -i 's/GITLAB_CI_URI/'${GITLAB_CI_URI}'/' /etc/gitlab-runner/config.toml
   sed -i 's/RUNNER_TOKEN/'${TOKEN}'/' /etc/gitlab-runner/config.toml
 }
 
