@@ -9,6 +9,7 @@ check_interval = 0
   executor = "docker+machine"
   limit = 10
   [runners.docker]
+    privileged = true
     image = "alpine/git:latest"
     tls_verify = false
     disable_cache = true
@@ -25,6 +26,7 @@ check_interval = 0
       "google-zone=ZONE",
       "google-machine-type=g1-small",
       "google-machine-image=https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/family/coreos-stable",
+      "google-scopes=https://www.googleapis.com/auth/cloud-platform",
       "google-tags=gitlab-ci-runner-worker",
       "google-preemptible=true",
       "google-use-internal-ip=true",
