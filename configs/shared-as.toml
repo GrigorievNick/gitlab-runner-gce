@@ -2,11 +2,12 @@ concurrent = 5
 check_interval = 0
 
 [[runners]]
+  environment = ["GIT_SSL_NO_VERIFY=true"]
   tls-ca-file="/etc/gitlab-runner/certs/server.crt"
   url = "GITLAB_CI_URI"
   name = "RUNNER_NAME"
   token = "RUNNER_TOKEN"
-  executor = "docker+machine"
+  executor = "docker"
   limit = 10
   [runners.docker]
     privileged = true
@@ -15,20 +16,3 @@ check_interval = 0
     disable_cache = true
     cache_dir = "/cache"
     volumes = ["/cache"]
-  [runners.machine]
-    IdleCount = 1
-    IdleTime = 3600
-    MaxBuilds = 10
-    MachineDriver = "google"
-    MachineName = "ci-as-w-%s"
-    MachineOptions = [
-      "google-project=PROJECT_ID",
-      "google-zone=ZONE",
-      "google-machine-type=g1-small",
-      "google-machine-image=https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/family/coreos-stable",
-      "google-scopes=https://www.googleapis.com/auth/cloud-platform",
-      "google-tags=gitlab-ci-runner-worker",
-      "google-preemptible=true",
-      "google-use-internal-ip=true",
-      "google-use-internal-ip-only=true"
-    ]
