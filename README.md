@@ -58,3 +58,7 @@ of how the GCS wants to handle the interoperability communication.
 
 Also [tls can't be skipped according](http://moonlightbox.logdown.com/posts/2016/09/12/gitlab-ci-runner-register-x509-error)
 So please follow this article.
+
+
+example 
+`sh create_runner.sh gitlab-docker-runner-1 novaposhta-184015 jdCpHMa1WsHTHaURX_rt https://gitlab.novaposhta.io gke-build-robot@novaposhta-184015.iam.gserviceaccount.com'
